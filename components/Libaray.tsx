@@ -5,7 +5,14 @@ import {AiOutlinePlus} from "react-icons/ai";
 import useAuthModal from "@/hooks/useAuthModal";
 import {useUser} from "@/hooks/useUser";
 import useUploadModal from "@/hooks/useUploadModal";
-const Libaray = () => {
+import {Song} from "@/types";
+import MediaItem from "./MediaItem";
+
+interface LibraryProps {
+  songs: Song[];
+}
+
+const Libaray: React.FC<LibraryProps> = ({songs}) => {
   const authModal = useAuthModal();
   const uploadModal = useUploadModal();
   const {user} = useUser();
@@ -31,7 +38,11 @@ const Libaray = () => {
           className="transition cursor-pointer text-neutral-400 hover:text-white"
         />
       </div>
-      <div className="flex flex-col px-3 mt-4 gap-y-2">List of Songs</div>
+      <div className="flex flex-col px-3 mt-4 gap-y-2">
+        {songs.map((item) => (
+          <MediaItem key={item.id} onClick={() => {}} data={item} />
+        ))}
+      </div>
     </div>
   );
 };
